@@ -31,9 +31,9 @@ chmod +x hogwarts
 
 ## Example Usage
 
-Suppose we have a MySQL script named `my_script.sql` that we want to execute across multiple databases listed in `my_databases.txt`.
+Suppose we have a MySQL script named `my_script.sql` that we want to execute across multiple databases listed in `live_dbs.txt`.
 
-The contents of `my_databases.txt` might look like this:
+The contents of `live_dbs.txt` might look like this:
 
 ```
 database1
@@ -46,10 +46,17 @@ And `my_script.sql` might contain SQL commands you want to execute across these 
 To execute the script using Hogwarts, run the following command:
 
 ```bash
-./hogwarts my_databases.txt my_script.sql
+./hogwarts live_dbs.txt my_script.sql
 ```
 
-Hogwarts will execute `my_script.sql` on each database listed in `my_databases.txt`. It will log the execution details in a file named `mysql_script_log.txt`.
+Hogwarts will execute `my_script.sql` on each database listed in `live_dbs.txt`. It will log the execution details in a file named `mysql_script_log.txt`.
+
+```bash
+./hogwarts test_dbs.txt my_script.sql
+```
+
+Hogwarts will execute `my_script.sql` on each database listed in `test_dbs.txt`. It will log the execution details in a file named `mysql_script_log.txt`.
+
 
 ## Script Features
 
