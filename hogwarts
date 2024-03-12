@@ -9,7 +9,11 @@ fi
 # Assign the arguments to variables
 database_list_file=$1
 mysql_script_file=$2
-log_file="mysql_script_log.txt"
+
+# Create a log file with a name based on the MySQL script file
+log_file="${mysql_script_file%.*}_log.txt"
+
+# mysql credentials
 MYSQL_USER="root"
 MYSQL_PASSWORD="password"
 
