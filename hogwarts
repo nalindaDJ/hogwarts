@@ -1,4 +1,18 @@
 #!/bin/bash
+################################################################################
+# Script Name: mysql_script_executor.sh
+# Description: This script executes a MySQL script for each database listed in
+#              a specified file and logs the output.
+# Author: Damith Jayasinghe
+# Version: 1.1
+################################################################################
+
+# Echo author details at the beginning of script execution
+echo "##########################################################################"
+echo "#                          Script by:                                    #"
+echo "#              ████████ Damith Jayasinghe ████████              		   #"
+echo "##########################################################################"
+
 
 # Check if the correct number of arguments is provided
 if [ "$#" -ne 2 ]; then
@@ -41,6 +55,12 @@ print_and_log_message() {
     log_message "$message"
 }
 
+# Create archive folder if it doesn't exist
+archive_folder="archive"
+if [ ! -d "$archive_folder" ]; then
+    mkdir "$archive_folder"
+fi
+
 # Loop through each database in the list and execute the MySQL script
 while IFS= read -r database_name; do
     print_and_log_message  "Executing MySQL script $mysql_script_file for database $database_name..."
@@ -57,4 +77,8 @@ while IFS= read -r database_name; do
 
 done < "$database_list_file"
 
-echo "Execution completed. Please check $log_file for details."
+# Move MySQL script file and log file to archive folder
+mv "$mysql_script_file" "$archive_folder/"
+mv "$log_file" "$archive_folder/"
+
+echo "Execution completed. Please check $archive_folder for archived MySQL script and log file."
