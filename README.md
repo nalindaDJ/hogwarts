@@ -7,13 +7,14 @@ Hogwarts is a bash script designed to execute MySQL scripts across multiple data
 To use Hogwarts, you need to follow the syntax:
 
 ```bash
-hogwarts <database_list_file> <mysql_script_file>
+hogwarts -d <database_list_file> -s <mysql_script_file> [-i <ignore_databases>]
 ```
 
 Here's a breakdown of each component:
 
-- `<database_list_file>`: This file contains a list of databases, each on a separate line. Hogwarts will iterate through these databases and execute the MySQL script against them.
-- `<mysql_script_file>`: This file contains the MySQL script that you want to execute on the databases listed in `<database_list_file>`.
+- `-d <database_list_file>`: This file contains a list of databases, each on a separate line. Hogwarts will iterate through these databases and execute the MySQL script against them.
+- `-s <mysql_script_file>`: This file contains the MySQL script that you want to execute on the databases listed in `<database_list_file>`.
+- `-i <ignore_databases>`: (Optional) A comma-separated list of databases to ignore.
 
 ## Installation
 
@@ -46,13 +47,13 @@ And `my_script.sql` might contain SQL commands you want to execute across these 
 To execute the script using Hogwarts, run the following command:
 
 ```bash
-./hogwarts live_dbs.txt my_script.sql
+./hogwarts -d live_dbs.txt -s my_script.sql
 ```
 
 Hogwarts will execute `my_script.sql` on each database listed in `live_dbs.txt`. It will log the execution details in a file named `mysql_script_log.txt`.
 
 ```bash
-./hogwarts test_dbs.txt my_script.sql
+./hogwarts -d test_dbs.txt -s my_script.sql
 ```
 
 Hogwarts will execute `my_script.sql` on each database listed in `test_dbs.txt`. It will log the execution details in a file named `mysql_script_log.txt`.
